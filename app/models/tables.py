@@ -4,8 +4,8 @@ class Herois(db.Model):
     __tablename__ = 'herois'
 
     
-    id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String(20), unique = True)
+    id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    nome = db.Column(db.String(45), unique = True)
     caracteristicas = db.Column(db.String(100))
     habilidades = db.Column(db.String(100))
     poderes = db.Column(db.String(100))
@@ -17,14 +17,14 @@ class Herois(db.Model):
         self.poderes = poderes
 
     def __repr__(self):
-        return "<User %r" % self.username
+        return self.nome 
 
 class Candidatos(db.Model):
     __tablename__ = 'candidatos'
 
 
-    id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String(20), unique = True)
+    id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    nome = db.Column(db.String(45), unique = True)
     caracteristicas = db.Column(db.String(100))
     habilidades = db.Column(db.String(100))
     poderes = db.Column(db.String(100))
