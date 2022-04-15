@@ -10,6 +10,7 @@ manager = Manager(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
+app.config.from_object('config')
 
 from app.controllers import default
 
