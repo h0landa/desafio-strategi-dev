@@ -53,5 +53,5 @@ def vingadores():
 
 @app.route("/candidatos/equipe")
 def equipe():
-    result = equipe.query.all()
+    result = Equipe.query.all()
     return render_template("equipe.html", res=result)
