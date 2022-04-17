@@ -10,13 +10,13 @@ import MySQLdb.cursors
 def index():
     msg = ''
     if request.method == 'POST':
-        x = request.form.getlist('mycheckbox')
-        for c in x:
-            presente = Candidatos.query.filter_by(nome=c).first()
+        lista_herois = request.form.getlist('mycheckbox')
+        for candidatos in lista_herois:
+            presente = Candidatos.query.filter_by(nome=candidatos).first()
             if presente:
                 msg = 'Esse herói já foi cadastrado'
             else:
-                me = Candidatos(c)
+                me = Candidatos(candidatos)
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
@@ -30,16 +30,16 @@ def index():
 def candidatos():
     msg = ''
     if request.method == 'POST':
-        x = request.form.getlist('mycheckbox')
-        y = request.form.get('check')
-        for c in x:
-            if y == 'vingadores':
-                me = Vingadores(c)
+        lista_herois = request.form.getlist('mycheckbox')
+        escolha = request.form.get('check')
+        for escolha in lista_herois:
+            if escolha == 'vingadores':
+                me = Vingadores(escolha)
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Heróis enviados para os Vingadores'
-            elif y == 'equipe':
-                me = Equipe(c)
+            elif escolha == 'equipe':
+                me = Equipe(escolha)
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Heróis enviados para a Equipe'
