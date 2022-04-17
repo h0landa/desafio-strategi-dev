@@ -20,9 +20,7 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute('SELECT * FROM herois;')
-    result = cur.fetchall()
+    result = Herois.query.all()
     return render_template("index.html", res=result, mensagem=msg)
 
 
@@ -43,20 +41,17 @@ def candidatos():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Heróis enviados para a Equipe'
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute('SELECT * FROM candidatos;')
-    result = cur.fetchall()
+    result = Candidatos.query.all()
     return render_template("candidatos.html", res=result, mensagem=msg)
 
 
 @app.route("/candidatos/vingadores")
 def vingadores():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cur.execute('SELECT * FROM vingadores;')
-    result = cur.fetchall()
+    result = Vingadores.query.all()
     return render_template("vingadores.html", res=result)
 
 
 @app.route("/candidatos/equipe")
 def equipe():
-    return 'Página da equipe'
+    result = equipe.query.all()
+    return render_template("equipe.html", res=result)
