@@ -52,21 +52,11 @@
     <form action="" method="POST">
     <div class="col-md-10 col-md-offset-20" style="overflow-x: auto;">
         <h1>Heróis da Equipe</h1>
-        {% if mensagem == 'Heróis enviados para os Vingadores' %}
-        <div class="alert alert-success" role="alert">
-            Heróis enviados para os <b>Vingadores</b>
-        </div>
-        {% elif mensagem == 'Heróis enviados para a Equipe' %}
-        <div class="alert alert-success" role="alert">
-            Heróis enviados para a <b>Equipe</b>
-        </div>
-        {% endif %}
     <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
             <th scope="col">id</th>
             <th scope="col">Nomes</th>
-            <th scope="col">#</th>
         </tr>
         </thead>
         <tbody>
@@ -79,24 +69,11 @@
           {% endfor %}
         </tbody>
       </table>
+    <a href="http://localhost:5000/index">
+        <input type="button" class="btn btn-danger" value="Voltar para index">
+    </a
     </div>
-    <div class="box">
-        <fieldset>
-            <h5>Quero Enviar Para:</h5>
-            <div>
-            <input type="checkbox" value="vingadores" name="check" id="vingadores">
-            <label for="vingadores">Enviar para Vingadores</label>
-            </div>
-            <div>
-            <input type="checkbox" value="equipe" name="check" id="equipe">
-            <label for="equipe">Enviar para Equipe</label>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-danger" value="Confirmar" name="enviar" id="enviar">
-            </div>
     </form>
-        </fieldset>
-    </div>
 </body>
 </html>
 {% endblock %}

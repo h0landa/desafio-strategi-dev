@@ -42,15 +42,6 @@
     <form action="" method="POST">
     <div class="col-md-10 col-md-offset-20" style="overflow-x: auto;">
         <h1>Heróis dos Vingadores</h1>
-        {% if mensagem == 'Heróis enviados para os Vingadores' %}
-        <div class="alert alert-success" role="alert">
-            Heróis enviados para os <b>Vingadores</b>
-        </div>
-        {% elif mensagem == 'Heróis enviados para a Equipe' %}
-        <div class="alert alert-success" role="alert">
-            Heróis enviados para a <b>Equipe</b>
-        </div>
-        {% endif %}
     <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
@@ -67,6 +58,9 @@
           {% endfor %}
         </tbody>
       </table>
+    <a href="http://localhost:5000/index">
+        <input type="button" class="btn btn-danger" value="Voltar para index">
+    </a
     </div>
     </form>
         </fieldset>
