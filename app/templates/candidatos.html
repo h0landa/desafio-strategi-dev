@@ -61,7 +61,6 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">id</th>
             <th scope="col">Nomes</th>
             <th scope="col">#</th>
         </tr>
@@ -69,7 +68,6 @@
         <tbody>
             {% for dados in res %}
           <tr>
-            <th scope="row" width="4px">{{dados['id']}}</th>
             <td style="text-align: center;" width="120px">{{dados['nome']}}</td>
             <td><input type="checkbox" value="{{dados['nome']}}" name="mycheckbox"></td>
         </tr>
