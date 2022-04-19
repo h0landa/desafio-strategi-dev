@@ -1,4 +1,4 @@
-{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,6 +49,7 @@
     }
 </style>
 <body>
+    {% block content %}
     <form action="" method="POST">
     <div class="col-md-10 col-md-offset-20" style="overflow-x: auto;">
         <h1>Heróis da Equipe</h1>
@@ -68,12 +69,12 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
     <input type="submit" class="btn btn-dark" value="Excluir">
     <a href="http://localhost:5000/index">
         <input type="button" class="btn btn-danger" value="Voltar para index">
     </a>
-    </div>
     </form>
+    {% endblock %}
 </body>
 </html>
-{% endblock %}

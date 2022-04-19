@@ -1,4 +1,3 @@
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +38,7 @@
     }
 </style>
 <body>
+    {% block content %}
     <form action="" method="POST">
     <div class="col-md-10 col-md-offset-20" style="overflow-x: auto;">
         <h1>Heróis dos Vingadores</h1>
@@ -67,6 +67,6 @@
     </form>
         </fieldset>
     </div>
+    {% endblock %}
 </body>
 </html>
-{% endblock %}

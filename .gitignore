@@ -2,3 +2,4 @@ __pycache*
 tests/geckodriver.log
 lembrar.txt
 config.py
+teste*
