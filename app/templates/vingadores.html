@@ -46,20 +46,24 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Nomes</th>
+            <th scope="col">#</th>
         </tr>
         </thead>
         <tbody>
             {% for dados in res %}
           <tr>
             <td width="120px">{{dados['nome']}}</td>
+            <td><input type="checkbox" value="{{dados['nome']}}" name="mycheckbox"></td>
         </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
+    <input type="submit" class="btn btn-dark" value="Excluir">
     <a href="http://localhost:5000/index">
         <input type="button" class="btn btn-danger" value="Voltar para index">
     </a
+    
     </form>
         </fieldset>
     </div>
