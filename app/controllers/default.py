@@ -35,24 +35,23 @@ def candidatos():
         lista_herois = request.form.getlist('mycheckbox')
         escolha = request.form.get('check')
         for herois in lista_herois:
-            if escolha == 'vingadores':
-                vingadores = Vingadores.query.filter_by(nome=herois).first()
-                if vingadores:
-                    msg = 'Esse herói já está nos Vingadores'
-                else:
-                    me = Vingadores(herois)
-                    db.session.add(me)
+            if escolha == 'vingadores':                
+                heroi = Vingadores(herois)
+                db.session.add(heroi)
+                db.session.commit()
+                msg = 'Heróis enviados para os Vingadores'
+                candidato = Candidatos.query.filter_by(nome=herois).first()
+                if candidato:
+                    db.session.delete(candidato)
                     db.session.commit()
-                    msg = 'Heróis enviados para os Vingadores'
-            elif escolha == 'equipe':
-                equipe = Equipe.query.filter_by(nome=herois).first()
-                if equipe:
-                    msg = 'Esse herói já está na equipe'
-                else:
-                    me = Equipe(herois)
-                    db.session.add(me)
+            if escolha == 'equipe':
+                heroi = Equipe(herois)
+                db.session.add(heroi)
+                msg = 'Heróis enviados para a Equipe'
+                candidato = Candidatos.query.filter_by(nome=herois).first()
+                if candidato:
+                    db.session.delete(candidato)
                     db.session.commit()
-                    msg = 'Heróis enviados para a Equipe'
     result = Candidatos.query.all()
     return render_template("candidatos.html", res=result, mensagem=msg)
 
