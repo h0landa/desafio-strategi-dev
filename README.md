@@ -42,13 +42,27 @@ storage.sql que veio na pasta do repositório e execute a instrução.
 chamado config.py, copie os dados que tem no arquivo config-example.py e cole nele.
 
 8.Para criar sua pasta Migrations. Na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
-* `python run.py db init`
 * `python run.py db migrate`
 * `python run.py db upgrade`
 
 9.Agora que você já tem a pasta Migrations e já instalou todas as dependencias, agora é só entrar na pasta onde você clonou o repositório e digitar o comando:`python run.py runserver`
 
 10.Por fim, você pode acessar o endereço `localhost:5000` no seu navegador.
+
+# Testes
+Os testes do desafio são desenvolvido com Splinter, uma ferramenta para testes de aplicações web com Python, e com a biblioteca embutida unittest. Estão localizados no diretório tests.
+
+Para executar todos os testes use o comando: `python -m unittest`
+
+O resultado desse comando, e se todos os testes estiverem passando, deverá
+ser algo como:
+```
+....
+----------------------------------------------------------------------
+Ran 4 tests in 300.129s
+
+OK
+```
 
 
 
