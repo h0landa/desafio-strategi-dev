@@ -11,7 +11,8 @@ import requests
 @app.route("/index/", methods=['GET', 'POST'])
 def index():
     msg = ''
-    request_x = requests.get("https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
+    request_x = requests.get(
+        "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
     todos = json.loads(request_x.content)
     lista_nomes = todos['data']['results']
     if request.method == 'POST':
@@ -35,7 +36,7 @@ def candidatos():
         lista_herois = request.form.getlist('mycheckbox')
         escolha = request.form.get('check')
         for herois in lista_herois:
-            if escolha == 'vingadores':                
+            if escolha == 'vingadores':
                 heroi = Vingadores(herois)
                 db.session.add(heroi)
                 db.session.commit()
@@ -66,6 +67,7 @@ def vingadores():
 def equipe():
     result = Equipe.query.all()
     return render_template("equipe.html", res=result)
+
 
 @app.route("/cadastro", methods=['GET', 'POST'])
 def cadastro():
