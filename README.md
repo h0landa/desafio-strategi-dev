@@ -6,6 +6,7 @@ Para executar o desafio na sua máquina são necessarios as seguintes tecnologia
 * phpmyadmin(opcional)
 * Python3
 * GitHubDesktop
+* Flask e como ORM o SQLALchemy
 
 # Windows
 
@@ -42,10 +43,9 @@ chamado config.py, copie os dados que tem no arquivo config-example.py e cole ne
 * `python run.py db migrate`
 * `python run.py db upgrade`
 
-6.Agora que você já tem a pasta Migrations e já instalou todas as dependencias, agora é só entrar na pasta onde você clonou o repositório e digitar o comando:
-```python run.py runserver```
+6.Agora que você já tem a pasta Migrations e já instalou todas as dependencias, agora é só entrar na pasta onde você clonou o repositório e digitar o comando:`python run.py runserver`
 
-7. Por fim, você pode acessar o endereço `localhost:5000` no seu navegador:
+7.Por fim, você pode acessar o endereço `localhost:5000` no seu navegador.
 
 
 
