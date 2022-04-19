@@ -1,15 +1,20 @@
+import json
 from app import app
 from app.models.tables import Candidatos, Herois, Vingadores, Equipe
 from flask import render_template, request
 from app import mysql, db
 import MySQLdb.cursors
 from app.models.herois import MyForm
+import requests
 
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index/", methods=['GET', 'POST'])
 def index():
     msg = ''
+    request_x = requests.get("https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
+    todos = json.loads(request_x.content)
+    lista_nomes = todos['data']['results']
     if request.method == 'POST':
         lista_herois = request.form.getlist('mycheckbox')
         for candidatos in lista_herois:
@@ -21,8 +26,7 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-    result = Herois.query.all()
-    return render_template("index.html", res=result, mensagem=msg)
+    return render_template("teste.html", mensagem=msg, todos=todos, lista_nomes=lista_nomes)
 
 
 @app.route("/candidatos/", methods=['GET', 'POST'])
@@ -76,3 +80,11 @@ def cadastro():
             msg = 'Herói Cadastrado com Sucesso'
     return render_template("cadastro.html", form=form, mensagem=msg)
 
+@app.route("/teste")
+def teste():
+    caminho = "{{c['thumbnail']['path']}}" + "." + "{{c['thumbnail']['extensions']}}"
+    lista = []
+    request = requests.get("https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
+    todos = json.loads(request.content)
+    lista_nomes = todos['data']['results']
+    return render_template("teste.html",lista_nomes=lista_nomes, todos=todos,cam=caminho)
