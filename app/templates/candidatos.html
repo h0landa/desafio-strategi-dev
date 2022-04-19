@@ -57,6 +57,14 @@
         <div class="alert alert-success" role="alert">
             Heróis enviados para a <b>Equipe</b>
         </div>
+        {% elif mensagem == 'Esse herói já está nos Vingadores' %}
+        <div class="alert alert-danger" role="alert">
+            Esse herói já está nos <b>Vingadores</b>
+        </div>
+        {% elif mensagem == 'Esse herói já está na equipe' %}
+        <div class="alert alert-danger" role="alert">
+            Esse herói já está na <b>Equipe</b>
+        </div>
         {% endif %}
     <table class="table table-bordered">
         <thead class="thead-dark">
