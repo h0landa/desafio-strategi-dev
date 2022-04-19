@@ -35,14 +35,16 @@ storage.sql que veio na pasta do repositório e execute a instrução.
 ```pip install -r requirements.py```
 
 4.Agora, na pasta que você baixou os arquivos do repositório, crie um arquivo
-chamado .env, copie os dados que tem no arquivo .env-example e cole nele.
+chamado config.py, copie os dados que tem no arquivo config-example.py e cole nele.
 
-5.Para criar sua pasta Migrations.Na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
+5.Para criar sua pasta Migrations. Na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
 * `python run.py db init`
 * `python run.py db migrate`
 * `python run.py db upgrade`
+
 6.Agora que você já tem a pasta Migrations e já instalou todas as dependencias, agora é só entrar na pasta onde você clonou o repositório e digitar o comando:
 ```python run.py runserver```
+
 7. Por fim, você pode acessar o endereço `localhost:5000` no seu navegador:
 
 
