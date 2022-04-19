@@ -57,16 +57,32 @@ def candidatos():
     return render_template("candidatos.html", res=result, mensagem=msg)
 
 
-@app.route("/candidatos/vingadores")
+@app.route("/candidatos/vingadores", methods=['GET', 'POST'])
 def vingadores():
+    msg = ''
+    lista_herois = request.form.getlist('mycheckbox')
+    if request.method == 'POST':
+        for herois in lista_herois:
+            vingador = Vingadores.query.filter_by(nome=herois).first()
+            db.session.delete(vingador)
+            db.session.commit()
+            msg = 'Sucesso'
     result = Vingadores.query.all()
-    return render_template("vingadores.html", res=result)
+    return render_template("vingadores.html", res=result, mensagem=msg)
 
 
-@app.route("/candidatos/equipe")
+@app.route("/candidatos/equipe", methods=['GET', 'POST'])
 def equipe():
+    msg = ''
+    lista_herois = request.form.getlist('mycheckbox')
+    if request.method == 'POST':
+        for herois in lista_herois:
+            heroi = Equipe.query.filter_by(nome=herois).first()
+            db.session.delete(heroi)
+            db.session.commit()
+            msg = 'Sucesso'
     result = Equipe.query.all()
-    return render_template("equipe.html", res=result)
+    return render_template("equipe.html", res=result, mensagem=msg)
 
 
 @app.route("/cadastro", methods=['GET', 'POST'])
