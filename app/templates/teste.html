@@ -19,17 +19,18 @@
     }
 </style>
 <body>
-    {% block content%}
-    {% if mensagem == 'Sucesso' %}
-    <div class="alert alert-sucess" role="alert">
-        {{mensagem}}
-    </div>
-    {% elif mensagem == 'Esse heró já foi cadastrado' %}
-    <div class="alert alert-danger" role="alert">
-        A simple primary alert—check it out!
-    </div>
-    {% endif %}
+    {% block content %}
     <form action="" method="POST">
+    <div>
+        {% if mensagem == 'Sucesso' %}
+        <div class="alert alert-success" role="alert">
+            {{mensagem}}
+        </div>
+        {% elif mensagem == 'Esse herói já foi cadastrado' %}
+        <div class="alert alert-danger" role="alert">
+            {{mensagem}}
+        </div>
+        {% endif %}
     {% for c in lista_nomes %}
     <div class="card" style="width: 18rem;">
     <div class="check_box">
@@ -48,7 +49,8 @@
     </div>
     {% endfor %}
     <div>
-        <input type="submmit" class="btn btn-primary" value="Enviar">
+        <input type="submit" class="btn btn-primary" value="Enviar">
+    </div>
     </div>
     </form>
     {% endblock %}
