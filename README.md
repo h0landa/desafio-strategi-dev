@@ -41,7 +41,7 @@ storage.sql que veio na pasta do repositório e execute a instrução.
 7.Agora, na pasta que você baixou os arquivos do repositório, crie um arquivo
 chamado config.py, copie os dados que tem no arquivo config-example.py e cole nele.
 
-8.Para criar sua pasta Migrations. Na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
+8.Para atualizar os dados da sua pasta Migrations com seu banco de dados, na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
 * `python run.py db migrate`
 * `python run.py db upgrade`
 
@@ -63,7 +63,3 @@ Ran 4 tests in 300.129s
 
 OK
 ```
-
-
-
-
