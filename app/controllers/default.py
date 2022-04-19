@@ -2,8 +2,7 @@ import json
 from app import app
 from app.models.tables import Candidatos, Herois, Vingadores, Equipe
 from flask import render_template, request
-from app import mysql, db
-import MySQLdb.cursors
+from app import db
 from app.models.herois import MyForm
 import requests
 
@@ -26,7 +25,7 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-    return render_template("teste.html", mensagem=msg, todos=todos, lista_nomes=lista_nomes)
+    return render_template("index.html", mensagem=msg, todos=todos, lista_nomes=lista_nomes)
 
 
 @app.route("/candidatos/", methods=['GET', 'POST'])
@@ -37,15 +36,23 @@ def candidatos():
         escolha = request.form.get('check')
         for herois in lista_herois:
             if escolha == 'vingadores':
-                me = Vingadores(herois)
-                db.session.add(me)
-                db.session.commit()
-                msg = 'Heróis enviados para os Vingadores'
+                vingadores = Vingadores.query.filter_by(nome=herois).first()
+                if vingadores:
+                    msg = 'Esse herói já está nos Vingadores'
+                else:
+                    me = Vingadores(herois)
+                    db.session.add(me)
+                    db.session.commit()
+                    msg = 'Heróis enviados para os Vingadores'
             elif escolha == 'equipe':
-                me = Equipe(herois)
-                db.session.add(me)
-                db.session.commit()
-                msg = 'Heróis enviados para a Equipe'
+                equipe = Equipe.query.filter_by(nome=herois).first()
+                if equipe:
+                    msg = 'Esse herói já está na equipe'
+                else:
+                    me = Equipe(herois)
+                    db.session.add(me)
+                    db.session.commit()
+                    msg = 'Heróis enviados para a Equipe'
     result = Candidatos.query.all()
     return render_template("candidatos.html", res=result, mensagem=msg)
 
@@ -79,12 +86,3 @@ def cadastro():
             db.session.commit()
             msg = 'Herói Cadastrado com Sucesso'
     return render_template("cadastro.html", form=form, mensagem=msg)
-
-@app.route("/teste")
-def teste():
-    caminho = "{{c['thumbnail']['path']}}" + "." + "{{c['thumbnail']['extensions']}}"
-    lista = []
-    request = requests.get("https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
-    todos = json.loads(request.content)
-    lista_nomes = todos['data']['results']
-    return render_template("teste.html",lista_nomes=lista_nomes, todos=todos,cam=caminho)
