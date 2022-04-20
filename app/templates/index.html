@@ -25,7 +25,7 @@
             <button onclick="window.location.href='http://localhost:5000/candidatos'" type="button" class="btn btn-danger">Candidatos</button>
             <button onclick="window.location.href='http://localhost:5000/candidatos/vingadores'" type="button" class="btn btn-warning">Vingadores</button>
             <button onclick="window.location.href= 'http://localhost:5000/candidatos/equipe'" type="button" class="btn btn-success">Equipe</button>
-          </div>
+        </div>
     <div>
         {% if mensagem == 'Sucesso' %}
         <div class="alert alert-success" role="alert">
@@ -36,23 +36,27 @@
             {{mensagem}}
         </div>
         {% endif %}
-    {% for c in lista_nomes %}
-    <div class="card" style="width: 18rem;">
-    <div class="check_box">
-        <input type="checkbox" value="{{c['name']}}" name="mycheckbox">
-    </div>
-        <img src="{{c['thumbnail']['path']}}.{{c['thumbnail']['extension']}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p class="card-text">
-            <b>{{c['name']}}</b>
-            <p>{{c['description']}}</p>
-            {% if c['description'] =='' %}
-            {{'O herói ' + c['name'] + ' não possui descrição.'}}
-            {% endif %}
-          </p>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for c in lista_nomes %}
+        <div class="col">
+        <div class="card mb-3" style="width: 18rem;">
+            <div class="check_box">
+                <input type="checkbox" value="{{c['name']}}" name="mycheckbox">
+            </div>
+            <img src="{{c['thumbnail']['path']}}.{{c['thumbnail']['extension']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <div class="card-text">
+                <b>{{c['name']}}</b>
+                <div>{{c['description']}}</div>
+                {% if c['description'] =='' %}
+                {{'O herói ' + c['name'] + ' não possui descrição.'}}
+                {% endif %}
+            </div>
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        </div>
+        {% endfor %}
+        </div>
     <div>
         <input type="submit" class="btn btn-primary" value="Enviar">
     </div>
