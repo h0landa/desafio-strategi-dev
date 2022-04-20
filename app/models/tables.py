@@ -25,9 +25,11 @@ class Candidatos(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nome = db.Column(db.String(45), unique=True)
+    path = db.Column(db.String(100))
 
-    def __init__(self, nome):
+    def __init__(self, nome, path):
         self.nome = nome
+        self.path = path
 
 
 class Vingadores(db.Model):
@@ -35,9 +37,11 @@ class Vingadores(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nome = db.Column(db.String(45), unique=True)
+    path = db.Column(db.String(100))
 
-    def __init__(self, nome):
+    def __init__(self, nome, path):
         self.nome = nome
+        self.path = path
 
 
 class Equipe(db.Model):
@@ -45,6 +49,8 @@ class Equipe(db.Model):
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     nome = db.Column(db.String(45), unique=True)
+    path = db.Column(db.String(100))
 
-    def __init__(self, nome):
+    def __init__(self, nome, path):
         self.nome = nome
+        self.path = path

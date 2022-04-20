@@ -16,13 +16,16 @@ def index():
     todos = json.loads(request_x.content)
     all_results = todos['data']['results']
     if request.method == 'POST':
-        lista_herois = request.form.getlist('mycheckbox')
-        for candidatos in lista_herois:
-            presente = Candidatos.query.filter_by(nome=candidatos).first()
+        all_herois = request.form.getlist('mycheckbox')
+        for candidatos in all_herois:
+            splited = candidatos.split('~')
+            nome_heroi = splited[0]
+            imagem_heroi = splited[1]
+            presente = Candidatos.query.filter_by(nome=nome_heroi).first()
             if presente:
                 msg = 'Esse herói já foi cadastrado'
             else:
-                me = Candidatos(candidatos)
+                me = Candidatos(nome_heroi, imagem_heroi)
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'

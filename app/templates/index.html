@@ -42,7 +42,7 @@
         <div class="col">
         <div class="card mb-3" style="width: 18rem;">
             <div class="check_box">
-                <input type="checkbox" value="{{results['name']}}" name="mycheckbox">
+                <input type="checkbox" value="{{results['name']}}~{{results['thumbnail']['path']}}.{{results['thumbnail']['extension']}}" name="mycheckbox">
             </div>
             <img src="{{results['thumbnail']['path']}}.{{results['thumbnail']['extension']}}" class="card-img-top" alt="...">
             <div class="card-body">
