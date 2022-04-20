@@ -12,7 +12,7 @@ import requests
 def index():
     msg = ''
     request_x = requests.get(
-        "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
+        "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450&limit=100")
     todos = json.loads(request_x.content)
     all_results = todos['data']['results']
     if request.method == 'POST':

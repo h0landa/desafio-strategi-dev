@@ -38,6 +38,7 @@
         {% endif %}
         <div class="row row-cols-1 row-cols-md-4 g-4">
             {% for results in all_results %}
+            {% if not 'image_not_available' in results['thumbnail']['path'].split('/') %}
         <div class="col">
         <div class="card mb-3" style="width: 18rem;">
             <div class="check_box">
@@ -48,13 +49,11 @@
               <div class="card-text">
                 <b>{{results['name']}}</b>
                 <div>{{results['description']}}</div>
-                {% if results['description'] == '' %}
-                {{'O herói ' + results['name'] + ' não possui descrição.'}}
-                {% endif %}
             </div>
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
     </div>
     <div>
