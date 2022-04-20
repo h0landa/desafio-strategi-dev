@@ -14,7 +14,7 @@ def index():
     request_x = requests.get(
         "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450")
     todos = json.loads(request_x.content)
-    lista_nomes = todos['data']['results']
+    all_results = todos['data']['results']
     if request.method == 'POST':
         lista_herois = request.form.getlist('mycheckbox')
         for candidatos in lista_herois:
@@ -26,7 +26,7 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-    return render_template("index.html", mensagem=msg, todos=todos, lista_nomes=lista_nomes)
+    return render_template("index.html", mensagem=msg, all_results=all_results)
 
 
 @app.route("/candidatos/", methods=['GET', 'POST'])
@@ -84,7 +84,7 @@ def equipe():
     result = Equipe.query.all()
     return render_template("equipe.html", res=result, mensagem=msg)
 
-
+#Função para se caso a API da marvel não estiver no ar
 @app.route("/cadastro", methods=['GET', 'POST'])
 def cadastro():
     msg = ''

@@ -37,26 +37,26 @@
         </div>
         {% endif %}
         <div class="row row-cols-1 row-cols-md-4 g-4">
-        {% for c in lista_nomes %}
+            {% for results in all_results %}
         <div class="col">
         <div class="card mb-3" style="width: 18rem;">
             <div class="check_box">
-                <input type="checkbox" value="{{c['name']}}" name="mycheckbox">
+                <input type="checkbox" value="{{results['name']}}" name="mycheckbox">
             </div>
-            <img src="{{c['thumbnail']['path']}}.{{c['thumbnail']['extension']}}" class="card-img-top" alt="...">
+            <img src="{{results['thumbnail']['path']}}.{{results['thumbnail']['extension']}}" class="card-img-top" alt="...">
             <div class="card-body">
               <div class="card-text">
-                <b>{{c['name']}}</b>
-                <div>{{c['description']}}</div>
-                {% if c['description'] =='' %}
-                {{'O herói ' + c['name'] + ' não possui descrição.'}}
+                <b>{{results['name']}}</b>
+                <div>{{results['description']}}</div>
+                {% if results['description'] == '' %}
+                {{'O herói ' + results['name'] + ' não possui descrição.'}}
                 {% endif %}
             </div>
             </div>
         </div>
-        </div>
-        {% endfor %}
-        </div>
+    </div>
+    {% endfor %}
+    </div>
     <div>
         <input type="submit" class="btn btn-primary" value="Enviar">
     </div>
