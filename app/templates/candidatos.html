@@ -41,7 +41,7 @@
         border: 4px;
         height: 150px;
         position:absolute;
-        right: 300px;
+        margin-left: 350px;
         top: 250px;
     }
 </style>
@@ -69,15 +69,17 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
+            <th scope="col">IMG</th>
             <th scope="col">Nomes</th>
             <th scope="col">#</th>
         </tr>
         </thead>
         <tbody>
-            {% for dados in res %}
+            {% for results in all_results %}
           <tr>
-            <td style="text-align: center;" width="120px">{{dados['nome']}}</td>
-            <td><input type="checkbox" value="{{dados['nome']}}" name="mycheckbox"></td>
+            <td class="ft-perfil"><img src="{{results['path']}}" width="60px" height="60px" style="border-radius: 50px;"></td>
+            <td style="text-align: center;" width="120px">{{results['nome']}}</td>
+            <td><input type="checkbox" value="{{results['nome']}}~{{results['path']}}" name="mycheckbox"></td>
         </tr>
           {% endfor %}
         </tbody>

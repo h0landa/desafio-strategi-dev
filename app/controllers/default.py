@@ -36,28 +36,31 @@ def index():
 def candidatos():
     msg = ''
     if request.method == 'POST':
-        lista_herois = request.form.getlist('mycheckbox')
+        all_herois = request.form.getlist('mycheckbox')
         escolha = request.form.get('check')
-        for herois in lista_herois:
+        for herois in all_herois:
+            splited = herois.split('~')
+            nome_heroi = splited[0]
+            imagem_heroi = splited[1]
             if escolha == 'vingadores':
-                heroi = Vingadores(herois)
+                heroi = Vingadores(nome_heroi,imagem_heroi)
                 db.session.add(heroi)
                 db.session.commit()
                 msg = 'Heróis enviados para os Vingadores'
-                candidato = Candidatos.query.filter_by(nome=herois).first()
+                candidato = Candidatos.query.filter_by(nome=nome_heroi).first()
                 if candidato:
                     db.session.delete(candidato)
                     db.session.commit()
             if escolha == 'equipe':
-                heroi = Equipe(herois)
+                heroi = Equipe(nome_heroi, imagem_heroi)
                 db.session.add(heroi)
                 msg = 'Heróis enviados para a Equipe'
-                candidato = Candidatos.query.filter_by(nome=herois).first()
+                candidato = Candidatos.query.filter_by(nome=nome_heroi).first()
                 if candidato:
                     db.session.delete(candidato)
                     db.session.commit()
-    result = Candidatos.query.all()
-    return render_template("candidatos.html", res=result, mensagem=msg)
+    all_results = Candidatos.query.all()
+    return render_template("candidatos.html", all_results=all_results, mensagem=msg)
 
 
 @app.route("/candidatos/vingadores", methods=['GET', 'POST'])

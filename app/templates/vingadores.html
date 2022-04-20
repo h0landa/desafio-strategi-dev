@@ -45,6 +45,7 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
           <tr>
+            <th scope="col">IMG</th>
             <th scope="col">Nomes</th>
             <th scope="col">#</th>
         </tr>
@@ -52,6 +53,7 @@
         <tbody>
             {% for dados in res %}
           <tr>
+            <td class="ft-perfil"><img src="{{dados['path']}}" width="60px" height="60px" style="border-radius: 20px;"></td>
             <td width="120px">{{dados['nome']}}</td>
             <td><input type="checkbox" value="{{dados['nome']}}" name="mycheckbox"></td>
         </tr>
