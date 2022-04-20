@@ -21,11 +21,20 @@
 <body>
     {% block content %}
     <form action="" method="POST">
-        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <button onclick="window.location.href='http://localhost:5000/candidatos'" type="button" class="btn btn-danger">Candidatos</button>
-            <button onclick="window.location.href='http://localhost:5000/candidatos/vingadores'" type="button" class="btn btn-warning">Vingadores</button>
-            <button onclick="window.location.href= 'http://localhost:5000/candidatos/equipe'" type="button" class="btn btn-success">Equipe</button>
-        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:5000/candidatos">Candidatos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:5000/candidatos/vingadores">Vingadores</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:5000/candidatos/equipe">Equipe</a>
+            </li>
+        </ul>
     <div>
         {% if mensagem == 'Sucesso' %}
         <div class="alert alert-success" role="alert">
