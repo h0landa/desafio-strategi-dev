@@ -1,8 +1,0 @@
-Math.floor(Date.now() / 1000)
-ts = 1650295608
-public_key = c76c2359c012efb90d17c77453f13267
-private_key = 521728934cdb4482d35a4110a1987f90dd2b3f65
-md5 hash = 08aeb1bfb6784528de8f2afecf243c69
-
-1650306744521728934cdb4482d35a4110a1987f90dd2b3f65c76c2359c012efb90d17c77453f13267
-https://pt.stackoverflow.com/questions/365209/inserir-imagem-em-css-dentro-de-tabelas-em-html
