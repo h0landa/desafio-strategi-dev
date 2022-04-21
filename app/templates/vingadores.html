@@ -53,7 +53,7 @@
         <tbody>
             {% for dados in res %}
           <tr>
-            <td class="ft-perfil"><img src="{{dados['path']}}" width="60px" height="60px" style="border-radius: 20px;"></td>
+            <td class="ft-perfil"><img src="{{dados['path']}}" width="60px" height="60px" style="border-radius: 50px;"></td>
             <td width="120px">{{dados['nome']}}</td>
             <td><input type="checkbox" value="{{dados['nome']}}" name="mycheckbox"></td>
         </tr>
@@ -62,7 +62,7 @@
       </table>
     </div>
     <input type="submit" class="btn btn-dark" value="Excluir">
-    <a href="http://localhost:5000/index">
+    <a href="/index">
         <input type="button" class="btn btn-danger" value="Voltar para index">
     </a
     

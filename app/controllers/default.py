@@ -7,14 +7,26 @@ from app.models.herois import MyForm
 import requests
 
 
-@app.route("/", methods=['GET', 'POST'])
-@app.route("/index/", methods=['GET', 'POST'])
-def index():
-    msg = ''
-    URL = "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450&nameStartsWith=W&limit=100"
+
+def atualiza_banco():
+    URL = "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450&limit=100"
     request_x = requests.get(f"{URL}")
     todos = json.loads(request_x.content)
     all_results = todos['data']['results']
+    for results in all_results:
+        card = Herois(results['name'],results['description'],
+        f"{results['thumbnail']['path']}.{results['thumbnail']['extension']}")
+        existe = Herois.query.filter_by(nome=results['name']).first()
+        if not existe:
+            db.session.add(card)
+            db.session.commit()
+
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/index/", methods=['GET', 'POST'])
+def index():
+    atualiza_banco()
+
+    msg = ''
     if request.method == 'POST':
         all_herois = request.form.getlist('mycheckbox')
         for candidatos in all_herois:
@@ -29,7 +41,10 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-    return render_template("index.html", mensagem=msg, all_results=all_results)
+                
+    page = request.args.get('page', 1, type=int)
+    todos_resultados = Herois.query.paginate(page=page, per_page=20)
+    return render_template("index.html", mensagem=msg, todos_resultados=todos_resultados)
 
 
 @app.route("/candidatos/", methods=['GET', 'POST'])
