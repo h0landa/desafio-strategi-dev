@@ -6,6 +6,7 @@ from app import db
 from app.models.herois import MyForm
 import requests
 from config import apikey, hash, ts
+from requests import exceptions
 
 
 
@@ -22,10 +23,24 @@ def atualiza_banco():
             db.session.add(card)
             db.session.commit()
 
+
+def check_internet():
+    #checar conexão de internet
+    url = 'https://developer.marvel.com/'
+    timeout = 5
+    try:
+        requests.get(url, timeout=timeout)
+        return True
+    except exceptions.ConnectionError:
+        return False
+
+
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index/", methods=['GET', 'POST'])
 def index():
-    atualiza_banco()
+    if check_internet():
+        atualiza_banco()
+
 
     msg = ''
     if request.method == 'POST':

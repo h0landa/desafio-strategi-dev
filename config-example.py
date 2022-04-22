@@ -7,4 +7,7 @@ PASSWORD = ''
 HOST = 'localhost'
 PORT = 3306
 SQLALCHEMY_DATABASE_URI = f'mysql://{USER}:{PASSWORD}@{HOST}/{DB}'
+ts = ''
+apikey = ''
+hash = ''
 
