@@ -49,7 +49,7 @@ chamado config.py, copie os dados que tem no arquivo config-example.py e cole ne
 
 10.Por fim, você pode acessar o endereço `localhost:5000` no seu navegador.
 
-# Testes
+# Testes(Os testes ainda estão em fase de teste...)
 Os testes do desafio são desenvolvido com Splinter, uma ferramenta para testes de aplicações web com Python, e com a biblioteca embutida unittest. Estão localizados no diretório tests.
 
 Para executar todos os testes use o comando: `python -m unittest`
