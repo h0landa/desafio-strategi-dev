@@ -5,16 +5,44 @@ from flask import render_template, request
 from app import db
 from app.models.herois import MyForm
 import requests
+from config import apikey, hash, ts
+from requests import exceptions
+
+
+
+def atualiza_banco():
+    URL = f"https://gateway.marvel.com/v1/public/characters?ts={ts}&apikey={apikey}&hash={hash}&limit=100"
+    request_x = requests.get(f"{URL}")
+    todos = json.loads(request_x.content)
+    all_results = todos['data']['results']
+    for results in all_results:
+        card = Herois(results['name'],results['description'],
+        f"{results['thumbnail']['path']}.{results['thumbnail']['extension']}")
+        existe = Herois.query.filter_by(nome=results['name']).first()
+        if not existe:
+            db.session.add(card)
+            db.session.commit()
+
+
+def check_internet():
+    #checar conexão de internet
+    url = 'https://developer.marvel.com/'
+    timeout = 5
+    try:
+        requests.get(url, timeout=timeout)
+        return True
+    except exceptions.ConnectionError:
+        return False
 
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index/", methods=['GET', 'POST'])
 def index():
+    if check_internet():
+        atualiza_banco()
+
+
     msg = ''
-    URL = "https://gateway.marvel.com/v1/public/characters?ts=1650306744&apikey=c76c2359c012efb90d17c77453f13267&hash=d155d3b7162d0ff5b0acb0c2e7471450&nameStartsWith=W&limit=100"
-    request_x = requests.get(f"{URL}")
-    todos = json.loads(request_x.content)
-    all_results = todos['data']['results']
     if request.method == 'POST':
         all_herois = request.form.getlist('mycheckbox')
         for candidatos in all_herois:
@@ -29,7 +57,10 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-    return render_template("index.html", mensagem=msg, all_results=all_results)
+
+    page = request.args.get('page', 1, type=int)
+    todos_resultados = Herois.query.paginate(page=page, per_page=20)
+    return render_template("index.html", mensagem=msg, todos_resultados=todos_resultados)
 
 
 @app.route("/candidatos/", methods=['GET', 'POST'])
@@ -59,8 +90,8 @@ def candidatos():
                 if candidato:
                     db.session.delete(candidato)
                     db.session.commit()
-    all_results = Candidatos.query.all()
-    return render_template("candidatos.html", all_results=all_results, mensagem=msg)
+    todos_resultados = Candidatos.query.all()
+    return render_template("candidatos.html", todos_resultados=todos_resultados, mensagem=msg)
 
 
 @app.route("/candidatos/vingadores", methods=['GET', 'POST'])
@@ -73,8 +104,8 @@ def vingadores():
             db.session.delete(vingador)
             db.session.commit()
             msg = 'Sucesso'
-    result = Vingadores.query.all()
-    return render_template("vingadores.html", res=result, mensagem=msg)
+    todos_resultados = Vingadores.query.all()
+    return render_template("vingadores.html", todos_resultados=todos_resultados, mensagem=msg)
 
 
 @app.route("/candidatos/equipe", methods=['GET', 'POST'])
@@ -87,8 +118,8 @@ def equipe():
             db.session.delete(heroi)
             db.session.commit()
             msg = 'Sucesso'
-    result = Equipe.query.all()
-    return render_template("equipe.html", res=result, mensagem=msg)
+    todos_resultados = Equipe.query.all()
+    return render_template("equipe.html", todos_resultados=todos_resultados, mensagem=msg)
 
 #Função para se caso a API da marvel não estiver no ar
 @app.route("/cadastro", methods=['GET', 'POST'])

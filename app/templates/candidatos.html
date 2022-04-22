@@ -1,4 +1,4 @@
-{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,102 +10,100 @@
     <title>Lista de Candidatos</title>
 </head>
 <style>
-    table {
-        display: block;
-        margin: auto;
-        width: 100%;
-        height: 200px;
-        max-width: 1200px;
-    }
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-repeat: no-repeat;
-        min-height: 100vh;
-        min-width: 100vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    h1 {
-        text-align:left;
-    }
-    my-form {
-        border-radius: 5%;
-        border: 4px;
+    body{
+        background-image: url(https://wallpapercave.com/wp/wp8793793.jpg);
     }
     .box {
         align-items: center;
-        background-color: aqua;
+        background-color:aliceblue;
         border-radius: 15px;
-        padding: 15px;
         border: 4px;
+        padding: 15px;
         height: 150px;
-        position:absolute;
-        margin-left: 350px;
-        top: 250px;
+        position: relative;
+        
     }
 </style>
 <body>
+    {% block content %}
+    <ul class="nav nav-tabs" style="background-color:aliceblue">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/candidatos">Candidatos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/candidatos/vingadores">Vingadores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/candidatos/equipe">Equipe</a>
+        </li>
+    </ul>
+    {% if mensagem == 'Heróis enviados para os Vingadores' %}
+    <div class="alert alert-success" role="alert" style="position: absolute;">
+        Heróis enviados para os <b>Vingadores</b>
+    </div>
+    {% elif mensagem == 'Heróis enviados para a Equipe' %}
+    <div class="alert alert-success" role="alert">
+        Heróis enviados para a <b>Equipe</b>
+    </div>
+    {% elif mensagem == 'Esse herói já está nos Vingadores' %}
+    <div class="alert alert-danger" role="alert">
+        Esse herói já está nos <b>Vingadores</b>
+    </div>
+    {% elif mensagem == 'Esse herói já está na equipe' %}
+    <div class="alert alert-danger" role="alert">
+        Esse herói já está na <b>Equipe</b>
+    </div>
+    {% endif %}
+    {% if mensagem == 'Sucesso' %}
+    <div class="alert alert-success" role="alert">
+        {{mensagem}}
+    </div>
+    {% elif mensagem == 'Esse herói já foi cadastrado' %}
+    <div class="alert alert-danger" role="alert">
+        {{mensagem}}
+    </div>
+    {% endif %}
     <form action="" method="POST">
-    <div class="col-md-10 col-md-offset-20" style="overflow-x: auto;">
-        <h1>Lista de Candidatos</h1>
-        {% if mensagem == 'Heróis enviados para os Vingadores' %}
-        <div class="alert alert-success" role="alert">
-            Heróis enviados para os <b>Vingadores</b>
+    <div>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for resultados in todos_resultados %}
+            {% if not 'image_not_available.jpg' in resultados['path'].split('/') %}
+        <div class="col">
+        <div class="card mb-3" style="width: 18rem;">
+            <div class="check_box">
+                <input type="checkbox" value="{{resultados['nome']}}~{{resultados['path']}}" name="mycheckbox">
+            </div>
+            <img src="{{resultados['path']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-text">
+                <b>{{resultados['nome']}}</b>
+                <div>{{resultados['descrição']}}</div>
+            </div>
+            </div>
         </div>
-        {% elif mensagem == 'Heróis enviados para a Equipe' %}
-        <div class="alert alert-success" role="alert">
-            Heróis enviados para a <b>Equipe</b>
-        </div>
-        {% elif mensagem == 'Esse herói já está nos Vingadores' %}
-        <div class="alert alert-danger" role="alert">
-            Esse herói já está nos <b>Vingadores</b>
-        </div>
-        {% elif mensagem == 'Esse herói já está na equipe' %}
-        <div class="alert alert-danger" role="alert">
-            Esse herói já está na <b>Equipe</b>
-        </div>
-        {% endif %}
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">IMG</th>
-            <th scope="col">Nomes</th>
-            <th scope="col">#</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for results in all_results %}
-          <tr>
-            <td class="ft-perfil"><img src="{{results['path']}}" width="60px" height="60px" style="border-radius: 50px;"></td>
-            <td style="text-align: center;" width="120px">{{results['nome']}}</td>
-            <td><input type="checkbox" value="{{results['nome']}}~{{results['path']}}" name="mycheckbox"></td>
-        </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
-    <a href="http://localhost:5000/candidatos" class="link-primary">Atualizar dados</a>
+    {% endif %}
+    {% endfor %}
     <div class="box">
-        <fieldset>
-            <h5>Quero Enviar Para:</h5>
-            <div>
-            <input type="radio" value="vingadores" name="check" id="vingadores">
-            <label for="vingadores">Enviar para Vingadores</label>
-            </div>
-            <div>
-            <input type="radio" value="equipe" name="check" id="equipe">
-            <label for="equipe">Enviar para Equipe</label>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary" value="Confirmar" name="enviar" id="enviar">
-                <a href="http://localhost:5000/index">
-                    <input type="button" class="btn btn-danger" value="Voltar para index">
-                </a
-            </div>
-    </form>
-        </fieldset>
+    <h5>Quero Enviar Para:</h5>
+    <div>
+    <input type="radio" value="vingadores" name="check" id="vingadores">
+    <label for="vingadores">Enviar para Vingadores</label>
     </div>
+    <div>
+    <input type="radio" value="equipe" name="check" id="equipe">
+    <label for="equipe">Enviar para Equipe</label>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Confirmar" name="enviar" id="enviar">
+        <a href="/index">
+            <input type="button" class="btn btn-danger" value="Voltar para index">
+        </a
+    </div>
+    </form>
+    {% endblock %}
 </body>
 </html>
-{% endblock %}

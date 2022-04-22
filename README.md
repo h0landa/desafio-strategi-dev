@@ -41,15 +41,17 @@ storage.sql que veio na pasta do repositório e execute a instrução.
 7.Agora, na pasta que você baixou os arquivos do repositório, crie um arquivo
 chamado config.py, copie os dados que tem no arquivo config-example.py e cole nele.
 
-8.Para atualizar os dados da sua pasta Migrations com seu banco de dados, na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
+8.Agora que criou o arquivo config.py, preencha as informações de acordo com os dados do seu DB(Banco de Dados) e preencha os campos ts, apykey e hash, de acordo com suas chaves da API da Marvel.
+
+9.Para atualizar os dados da sua pasta Migrations com seu banco de dados, na pasta que você clonou o repositório, digite os seguintes comandos respectivamente: 
 * `python run.py db migrate`
 * `python run.py db upgrade`
 
-9.Agora que você já tem a pasta Migrations e já instalou todas as dependencias, agora é só entrar na pasta onde você clonou o repositório e digitar o comando:`python run.py runserver`
+10.Agora que você já tem a pasta Migrations e já instalou todas as dependencias, agora é só entrar na pasta onde você clonou o repositório e digitar o comando:`python run.py runserver`
 
-10.Por fim, você pode acessar o endereço `localhost:5000` no seu navegador.
+11.Por fim, você pode acessar o endereço `localhost:5000` no seu navegador.
 
-# Testes
+# Testes(Os testes ainda estão em fase de teste...)
 Os testes do desafio são desenvolvido com Splinter, uma ferramenta para testes de aplicações web com Python, e com a biblioteca embutida unittest. Estão localizados no diretório tests.
 
 Para executar todos os testes use o comando: `python -m unittest`
