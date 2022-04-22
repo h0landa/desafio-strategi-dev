@@ -24,7 +24,7 @@
 <body>
     {% block content %}
     <form action="" method="POST">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="background-color: aliceblue;">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/index">Home</a>
             </li>
@@ -71,7 +71,6 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
-            <a class="page-link">Previous</a>
           </li>
           {% for page_num in todos_resultados.iter_pages() %}
           {% if page_num %}
@@ -80,7 +79,6 @@
           <li class="page-item"><a class="page-link" href="#">...</a></li>
           {% endif %}
           {% endfor %}
-            <a class="page-link" href="#">Next</a>
           </li>
         </ul>
     </nav>

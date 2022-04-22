@@ -41,7 +41,7 @@ def index():
                 db.session.add(me)
                 db.session.commit()
                 msg = 'Sucesso'
-                
+
     page = request.args.get('page', 1, type=int)
     todos_resultados = Herois.query.paginate(page=page, per_page=20)
     return render_template("index.html", mensagem=msg, todos_resultados=todos_resultados)
@@ -74,8 +74,8 @@ def candidatos():
                 if candidato:
                     db.session.delete(candidato)
                     db.session.commit()
-    all_results = Candidatos.query.all()
-    return render_template("candidatos.html", all_results=all_results, mensagem=msg)
+    todos_resultados = Candidatos.query.all()
+    return render_template("candidatos.html", todos_resultados=todos_resultados, mensagem=msg)
 
 
 @app.route("/candidatos/vingadores", methods=['GET', 'POST'])
@@ -88,8 +88,8 @@ def vingadores():
             db.session.delete(vingador)
             db.session.commit()
             msg = 'Sucesso'
-    result = Vingadores.query.all()
-    return render_template("vingadores.html", res=result, mensagem=msg)
+    todos_resultados = Vingadores.query.all()
+    return render_template("vingadores.html", todos_resultados=todos_resultados, mensagem=msg)
 
 
 @app.route("/candidatos/equipe", methods=['GET', 'POST'])
@@ -102,8 +102,8 @@ def equipe():
             db.session.delete(heroi)
             db.session.commit()
             msg = 'Sucesso'
-    result = Equipe.query.all()
-    return render_template("equipe.html", res=result, mensagem=msg)
+    todos_resultados = Equipe.query.all()
+    return render_template("equipe.html", todos_resultados=todos_resultados, mensagem=msg)
 
 #Função para se caso a API da marvel não estiver no ar
 @app.route("/cadastro", methods=['GET', 'POST'])

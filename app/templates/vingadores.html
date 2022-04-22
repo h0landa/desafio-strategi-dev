@@ -9,66 +9,60 @@
     <title>Vingadores</title>
 </head>
 <style>
-    table{
-        display: block;
-        margin: auto;
-        width: 100%;
-        width: 400px;
-        height: 200px;
-        max-width: 1200px;
-    }
-    td {
-        text-align: center;
-    }
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-repeat: no-repeat;
-        min-height: 100vh;
-        min-width: 100vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    h1 {
-        text-align:left;
-    }
-    my-form {
-        border-radius: 5%;
-        border: 4px;
-    }
+body{
+    background-image: url(https://wallpapercave.com/wp/wp8793793.jpg);
+}
+.box {
+    align-items: center;
+    position: fixed;
+    top: 530px;
+    padding: 15px;
+}
 </style>
 <body>
     {% block content %}
+    <ul class="nav nav-tabs" style="background-color:aliceblue">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/candidatos">Candidatos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/candidatos/vingadores">Vingadores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/candidatos/equipe">Equipe</a>
+        </li>
+    </ul>
     <form action="" method="POST">
-    <div class="col-md-10 col-md-offset-20" style="overflow-x: auto;">
-        <h1>Heróis dos Vingadores</h1>
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">IMG</th>
-            <th scope="col">Nomes</th>
-            <th scope="col">#</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for dados in res %}
-          <tr>
-            <td class="ft-perfil"><img src="{{dados['path']}}" width="60px" height="60px" style="border-radius: 50px;"></td>
-            <td width="120px">{{dados['nome']}}</td>
-            <td><input type="checkbox" value="{{dados['nome']}}" name="mycheckbox"></td>
-        </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for resultados in todos_resultados %}
+            {% if not 'image_not_available.jpg' in resultados['path'].split('/') %}
+        <div class="col">
+        <div class="card mb-3" style="width: 18rem;">
+            <div class="check_box">
+                <input type="checkbox" value="{{resultados['nome']}}" name="mycheckbox">
+            </div>
+            <img src="{{resultados['path']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-text">
+                <b>{{resultados['nome']}}</b>
+                <div>{{resultados['descrição']}}</div>
+            </div>
+            </div>
+        </div>
     </div>
-    <input type="submit" class="btn btn-dark" value="Excluir">
-    <a href="/index">
-        <input type="button" class="btn btn-danger" value="Voltar para index">
-    </a
-    
+    {% endif %}
+    {% endfor %}
+    <div class="box">
+        <input type="submit" class="btn btn-dark" value="Excluir">
+        <a href="/index">
+            <input type="button" class="btn btn-danger" value="Voltar para index">
+        </a
+    </div>
     </form>
-        </fieldset>
-    </div>
     {% endblock %}
 </body>
 </html>
